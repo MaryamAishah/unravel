@@ -238,7 +238,7 @@ sys.stderr = JSWriter()
       <header className="unravel-header">
         <div className="brand">
           <h1>Unravel</h1>
-          <p className="tag">Free, Interactive Python Explainer & Sandbox</p>
+          <h2 className="tag">Your Coding Partner</h2>
         </div>
         <div className="status">{statusMsg}</div>
       </header>

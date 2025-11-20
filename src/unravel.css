@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
+
 :root{
   --bg:#f7f8fb;
   --card:#ffffff;
@@ -102,3 +104,30 @@ html,body,#root{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"
   background: #fff8e1;
   border: 1px solid #f6c56d;
 }
+
+.unravel-header h1 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 3.6rem;
+  font-weight: 700;
+  margin: 0;
+  color: #0d0d0d;
+  letter-spacing: -1.5px;
+  text-shadow: 0px 1px 3px rgb(20, 0, 99);
+}
+.unravel-header h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+  color: #1a0060;
+}
+.panel {
+  transition: all 0.3s ease;
+  border: 1px solid #e5e5e5;
+}
+
+.panel:hover {
+  border-color: #d0d0d0;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.04);
+  transform: translateY(-3px);
+}
+
