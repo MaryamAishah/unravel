@@ -1,16 +1,22 @@
-# React + Vite
+# 🔍 Unravel: Your Coding Partner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Paste any piece of Python, hit **Analyze**, and instantly watch your code come alive! Unravel reads your Python code, runs it instantly, and turns both the logic and the errors into clear, simple, line-by-line explanations.
 
-Currently, two official plugins are available:
+Unravel is a browser-based learning tool that:
+- Takes Python code as input
+- Explains it line-by-line in simple English
+- Runs the code directly in the browser using Pyodide
+- Detects errors and explains them in a friendly way
+- Indicates the exact line where the error occurred
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Unravel is built with React and Vite, and no backend is required.
 
-## React Compiler
+## Features
+- Real Python execution through Pyodide
+- Automatic line-by-line explanations
+- Beginner-friendly error messages
+- Clean, minimal interface
+- Fast development with Vite
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## License
+This project is for personal and educational use.
