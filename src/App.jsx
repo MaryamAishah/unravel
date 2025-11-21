@@ -49,55 +49,109 @@ for i in range(3):
 
   function explainLine(line) {
     const t = line.trim();
-    if (!t)
-      return "Blank line: used to separate logical sections and make the code easier to read.";
+if (!t)
+  return "Blank line: used to separate logical sections and make the code easier to read.";
 
-    if (t.startsWith("#"))
-      return "Comment: a human-readable note ignored by Python. Comments explain why something is done, helping future readers.";
+if (t.startsWith("#"))
+  return "Comment: a human-readable note ignored by Python. Comments explain why something is done, helping future readers.";
 
-    if (/^from\s+\w+/.test(t) || /^import\s+\w+/.test(t))
-      return "Import statement: brings in a module or specific functions so you can use pre-built tools and utilities.";
+if (/^from\s+\w+/.test(t) || /^import\s+\w+/.test(t))
+  return "Import statement: brings in a module or specific functions so you can use pre-built tools and utilities.";
 
-    if (/^def\s+\w+\s*\(/.test(t))
-      return "Function definition: declares a named block of reusable logic. Call the function later to perform that task.";
+if (/^def\s+\w+\s*\(/.test(t))
+  return "Function definition: declares a named block of reusable logic. Call the function later to perform that task.";
 
-    if (/^class\s+\w+\s*/.test(t))
-      return "Class definition: creates a blueprint for objects that bundle data (attributes) and behavior (methods).";
+if (/^class\s+\w+/.test(t))
+  return "Class definition: creates a blueprint for objects that bundle data (attributes) and behavior (methods).";
 
-    if (/^for\s+/.test(t))
-      return "For-loop: repeats the indented block for each item in a sequence (list, range, etc.), useful for iteration.";
+if (/^for\s+/.test(t))
+  return "For-loop: repeats the indented block for each item in a sequence such as a list or range.";
 
-    if (/^while\s+/.test(t))
-      return "While-loop: repeats as long as a condition stays true; be careful to ensure the condition becomes false eventually.";
+if (/^while\s+/.test(t))
+  return "While-loop: repeats as long as a condition stays true; make sure the condition becomes false eventually.";
 
-    if (/^if\s+/.test(t))
-      return "If statement: checks a condition and runs the following block when the condition is true (decision-making).";
+if (/^if\s+/.test(t))
+  return "If statement: checks a condition and runs the following block when the condition is true.";
 
-    if (/^elif\s+/.test(t))
-      return "Elif (else-if): an additional condition checked if previous if/elif branches were false.";
+if (/^elif\s+/.test(t))
+  return "Elif: an additional condition checked if previous if or elif branches were false.";
 
-    if (/^else:/.test(t))
-      return "Else: fallback branch that runs when none of the preceding conditions evaluated to true.";
+if (/^else:/.test(t))
+  return "Else: fallback branch that runs when none of the preceding conditions evaluated to true.";
 
-    if (/=/.test(t) && !/==/.test(t))
-      return "Assignment: stores a value into a variable so you can reuse it later in the program.";
+if (/^\s*except\b/.test(t))
+  return "Except catches an error and allows your program to recover, preventing crashes.";
 
-    if (/^print\s*\(/.test(t))
-      return "Print: displays text or values in the console. Useful for results and simple debugging.";
+if (/^\s*try\s*:/.test(t))
+  return "Try block: runs code that might cause an error so you can handle it safely.";
 
-    if (/\w+\s*\(.+\)/.test(t))
-      return "Function call: executes a function (built-in, library, or user-defined) and may return a value.";
+if (/^\s*finally\s*:/.test(t))
+  return "Finally runs no matter what happened before it, useful for clean-up steps.";
 
-    if (/return\s+/.test(t))
-      return "Return: exits a function and optionally provides a value back to the caller.";
+if (/range\s*\(/.test(t))
+  return "This line uses range to produce a sequence of numbers, often used to control loop counts.";
 
-    if (/try\s*:/.test(t) || /except\s+.+\s*:/.test(t) || /finally\s*:/.test(t))
-      return "Exception handling: try/except blocks let you handle errors gracefully instead of letting the program crash.";
+if (/input\s*\(/.test(t))
+  return "Input asks the user to type something so the program can react to their answer.";
 
-    if (/\[.+\]|\{.+\}|\(.+\)/.test(t) && /:/.test(t))
-      return "Collection or mapping: this appears to create or access lists/dicts/tuples used to store multiple values.";
+if (/len\s*\(/.test(t))
+  return "Len returns the number of items in a list, string or other collection.";
 
-    return "Python statement: performs an operation (expression, access, or call) that contributes to the program's behavior.";
+if (/^print\s*\(/.test(t))
+  return "Print: displays text or values in the console. Useful for results and simple debugging.";
+
+if (/^\[.*\]$/.test(t.trim()) && !/:/.test(t))
+  return "This line creates a list, an ordered collection of items.";
+
+if (/^\{.*\}$/.test(t.trim()) && t.includes(":"))
+  return "This line creates a dictionary, which stores data as key-value pairs.";
+
+if (/^\(.*\)$/.test(t.trim()) && !t.includes("="))
+  return "This line creates a tuple, which is like a list but cannot be changed after creation.";
+
+if ((/\[.+\]|\{.+\}|\(.+\)/.test(t)) && /:/.test(t))
+  return "Working with lists, dictionaries or tuples helps organize groups of values for easier access.";
+
+if (/\w+\[.+\]/.test(t) && !/for/.test(t))
+  return "This accesses a specific element inside a list or string using its index.";
+
+if (/[\+\-\*\/%]/.test(t) && !/^print/.test(t))
+  return "This line performs a mathematical operation, letting your program calculate values instead of hard-coding results.";
+
+if (/==|!=|<=|>=|<|>/.test(t))
+  return "This line compares two values to determine whether a condition is true.";
+
+if (/\band\b|\bor\b|\bnot\b/.test(t))
+  return "This line uses boolean logic to combine conditions for more precise decisions.";
+
+if (/^\s*pass\s*$/.test(t))
+  return "Pass acts as a placeholder that tells Python to do nothing.";
+
+if (/^\s*break\s*$/.test(t))
+  return "Break stops the nearest loop immediately.";
+
+if (/^\s*continue\s*$/.test(t))
+  return "Continue skips the rest of the current loop cycle and moves to the next.";
+
+if (/\w+\.\w+\s*\(/.test(t))
+  return "This is a method call, meaning a function that belongs to an object is being used.";
+
+if (/\w+\s*\(.+\)/.test(t))
+  return "Function call: executes a function that may return a value.";
+
+if (/return\s+/.test(t))
+  return "Return: exits a function and optionally provides a value back to the caller.";
+
+if (/return/.test(t) && (/for /.test(t) || /while /.test(t)))
+  return "Returning inside a loop ends both the loop and the function.";
+
+if (/=/.test(t) && !/==/.test(t))
+  return "Assignment: stores a value into a variable so you can reuse it later in the program.";
+
+if (/^\w+\s*$/.test(t))
+  return "This looks like a variable reference, which means the program is retrieving the value stored inside that name.";
+
+return "Python statement: performs an operation that contributes to the program's behavior.";
   }
 
   function produceLineByLineExplanations(src) {
@@ -170,18 +224,26 @@ const lineInfo = match ? ` (Line ${match[1]})` : "";
 
       pyodide.globals.set("js_print", jsPrint);
 
+pyodide.globals.set("js_input", (msg) => {
+  const result = prompt(msg || "");
+  return result === null ? "" : String(result);
+});
 
-      await pyodide.runPythonAsync(`
+await pyodide.runPythonAsync(`
 import sys
+
 class JSWriter:
     def write(self, s):
-        if s is None:
-            return
-        if str(s).strip():
+        if s and str(s).strip():
             js_print(s)
+
 sys.stdout = JSWriter()
 sys.stderr = JSWriter()
+
+def input(prompt=""):
+    return js_input(prompt)
 `);
+
 
       try {
         await pyodide.runPythonAsync(code);
@@ -287,7 +349,7 @@ sys.stderr = JSWriter()
           </pre>
 
           <div className="panel-head" style={{ marginTop: 16 }}>
-            <h3>Error / Hints</h3>
+            <h3>Error/Hints</h3>
             <div className="hint">Beginner-friendly explanations for runtime or syntax errors.</div>
           </div>
 
